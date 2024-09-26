@@ -16,11 +16,12 @@ async function AdminLoginService(data: any) {
             
             
         } else {
-            throw new Error(`Login Failed: ${response.data.message || "No token received."}`);
+            throw new Error(response.data.message || "No token received");
         }
 
-    } catch (err:any) {
-        throw new Error(err);
+    } catch (error: any) {
+        console.log(error)
+        throw error
     }
 }
 

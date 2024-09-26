@@ -24,10 +24,19 @@ const resultSchema = new Schema({
   },
 });
 const studentSchema = new Schema({
-  studentName: {
+  firstName: {
     type: String,
     required: true,
   },
+  middleName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+
   gender: {
     type: String,
     required: true,
@@ -59,7 +68,9 @@ const Student = mongoose.model("Student", studentSchema);
 
 function vaildateStudent(student) {
   const schema = Joi.object({
-    studentName: Joi.string().required(),
+    firstName: Joi.string().required(),
+    middleName: Joi.string().required(),
+    lastName: Joi.string().required(),
     username: Joi.string().required().min(4).max(100),
     password: Joi.string().required().min(6).max(1024),
 
@@ -72,7 +83,9 @@ function vaildateStudent(student) {
 
 function validateRegisterStudent(student) {
   const schema = Joi.object({
-    studentName: Joi.string().required(),
+    firstName: Joi.string().required(),
+    middleName: Joi.string().required(),
+    lastName: Joi.string().required(),
     username: Joi.string().required().min(4).max(100),
 
     grade: Joi.required(),

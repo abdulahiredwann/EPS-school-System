@@ -11,7 +11,7 @@ const useValidation = () => {
         const token = localStorage.getItem("x-auth-token");
         if (!token) throw new Error("No Token found");
 
-        const response = await axios.post("http://localhost:3000/verify", { token });
+        const response = await axios.post("http://localhost:3000/api/verify", { token });
         if (!response.data.valid) throw new Error("Invalid Token");
       } catch (err) {
         navigate("/"); // Redirect to login page if token is invalid

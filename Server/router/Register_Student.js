@@ -19,7 +19,7 @@ function isValidObjectId(id) {
 // Register New Student only for admin
 router.post("/", [auth, admin], async (req, res) => {
   try {
-    let { studentName, username, grade, gender } = req.body;
+    let { firstName, lastName, middleName, username, grade, gender } = req.body;
     const defaultPassword = "12345678"; // Default password
     const { error } = validateRegisterStudent(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -38,7 +38,9 @@ router.post("/", [auth, admin], async (req, res) => {
     const results = await initializeResults();
 
     let newstudent = new Student({
-      studentName: studentName,
+      firstName,
+      lastName,
+      middleName,
       username: username,
       password: password,
       grade: grade,

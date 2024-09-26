@@ -69,9 +69,6 @@ router.get("/:gradeName/students", async (req, res) => {
 // Add Grade
 router.post("/", async (req, res) => {
   try {
-    const { error } = req.body;
-    if (error) return res.status(400).send(error.details[0].message);
-
     let newGrade = new Grade({
       gradeName: req.body.gradeName,
       teachers: req.body.teachers,

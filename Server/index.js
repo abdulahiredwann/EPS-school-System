@@ -22,7 +22,7 @@ app.use(express.json());
 
 // sudo systemctl start mongodb
 mongoose
-  .connect("mongodb://127.0.0.1:27017/SMS")
+  .connect("mongodb://127.0.0.1:27017/EPS")
   .then(() => {
     console.log("Connected to db ....");
   })
@@ -30,19 +30,19 @@ mongoose
     console.log("Could not connect to MongoDb....", err);
   });
 
-app.use("/subject", subject);
-app.use("/teacher", teacher);
-app.use("/grade", grade);
-app.use("/student", student);
-app.use("/registerteacher", registerTeacher);
-app.use("/registerstudent", registerStudent);
-app.use("/loginteacher", loginTeacher);
-app.use("/loginstudent", loginStudent);
-app.use("/verify", validation);
-app.use("/result", result);
-app.use("/init", ini);
-app.use("/admin", admin);
-app.use("/adminlogin", adminLogin);
+app.use("/api/subject", subject);
+app.use("/api/teacher", teacher);
+app.use("/api/grade", grade);
+app.use("/api/student", student);
+app.use("/api/registerteacher", registerTeacher);
+app.use("/api/registerstudent", registerStudent);
+app.use("/api/loginteacher", loginTeacher);
+app.use("/api/loginstudent", loginStudent);
+app.use("/api/verify", validation);
+app.use("/api/result", result);
+app.use("/api/init", ini);
+app.use("/api/admin", admin);
+app.use("/api/adminlogin", adminLogin);
 
 app.listen(3000, () => {
   console.log("Server is listening ");
