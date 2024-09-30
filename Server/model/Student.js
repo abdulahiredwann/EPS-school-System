@@ -11,11 +11,34 @@ const resultSchema = new Schema({
     ref: "Subject",
     required: true,
   },
-  exams: {
-    midExam1: {
+  firstSemester: {
+    test1: {
       type: Number,
     },
-    midExam2: {
+    test2: {
+      type: Number,
+    },
+    classActivity: {
+      type: Number,
+    },
+    midExam: {
+      type: Number,
+    },
+    finalExam: {
+      type: Number,
+    },
+  },
+  secondSemester: {
+    test1: {
+      type: Number,
+    },
+    test2: {
+      type: Number,
+    },
+    classActivity: {
+      type: Number,
+    },
+    midExam: {
       type: Number,
     },
     finalExam: {

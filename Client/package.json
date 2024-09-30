@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -19,6 +18,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@mui/icons-material": "^5.16.0",
     "@mui/material": "^5.16.0",
+    "@mui/x-charts": "^7.18.0",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.3",

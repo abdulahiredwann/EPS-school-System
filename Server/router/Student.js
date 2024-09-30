@@ -65,7 +65,9 @@ router.get(
       }
 
       const pickedStudent = _.pick(student, [
-        "studentName",
+        "firstName",
+        "lastName",
+        "middleName",
         "username",
         "grade",
         "results",

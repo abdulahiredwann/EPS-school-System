@@ -19,10 +19,12 @@ ChartJS.register(
   Legend
 );
 
-interface Exam {
-  midExam1: number;
-  midExam2: number;
-  finalExam: number;
+interface Semester {
+  test1: number | null;
+  test2: number | null;
+  classActivity: number | null;
+  midExam: number | null;
+  finalExam: number | null;
 }
 
 interface Subject {
@@ -30,43 +32,40 @@ interface Subject {
   subjectName: string;
 }
 
-interface Results {
-  exams: Exam;
+interface Result {
+  firstSemester: Semester;
+  secondSemester: Semester;
   subject: Subject;
 }
 
 interface ProgressChartProps {
-  results: Results[];
+  results: Result[];
+  isFirstSemester: boolean;
 }
 
-const ProgressChart: React.FC<ProgressChartProps> = ({ results }) => {
-  const labels = results.map((result) => result.subject.subjectName);
-  const midExam1Data = results.map((result) => result.exams.midExam1);
-  const midExam2Data = results.map((result) => result.exams.midExam2);
-  const finalExamData = results.map((result) => result.exams.finalExam);
-
+const ProgressChart: React.FC<ProgressChartProps> = ({
+  results,
+  isFirstSemester,
+}) => {
   const data = {
-    labels,
+    labels: results.map((result) => result.subject.subjectName),
     datasets: [
       {
-        label: "Mid Exam 1",
-        data: midExam1Data,
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 1,
-      },
-      {
-        label: "Mid Exam 2",
-        data: midExam2Data,
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        label: "Total Score (Percentage)",
+        data: results.map((result) => {
+          const semester = isFirstSemester
+            ? result.firstSemester
+            : result.secondSemester;
+          return (
+            (semester.test1 || 0) +
+            (semester.test2 || 0) +
+            (semester.classActivity || 0) +
+            (semester.midExam || 0) +
+            (semester.finalExam || 0)
+          );
+        }),
+        backgroundColor: "rgba(54, 162, 235, 0.6)",
         borderColor: "rgba(54, 162, 235, 1)",
-        borderWidth: 1,
-      },
-      {
-        label: "Final Exam",
-        data: finalExamData,
-        backgroundColor: "rgba(255, 206, 86, 0.2)",
-        borderColor: "rgba(255, 206, 86, 1)",
         borderWidth: 1,
       },
     ],
@@ -74,6 +73,7 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ results }) => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top" as const,
@@ -83,9 +83,19 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ results }) => {
         text: "Student Progress",
       },
     },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100, // Max score is 100%
+      },
+    },
   };
 
-  return <Bar data={data} options={options} />;
+  return (
+    <div style={{ height: "400px", width: "100%" }}>
+      <Bar data={data} options={options} />
+    </div>
+  );
 };
 
 export default ProgressChart;

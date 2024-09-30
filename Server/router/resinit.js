@@ -7,9 +7,18 @@ async function initializeResults() {
   // Initialize results with all subjects
   const results = subjects.map((subject) => ({
     subject: subject._id,
-    exams: {
-      midExam1: null,
-      midExam2: null,
+    firstSemester: {
+      test1: null,
+      test2: null,
+      classActivity: null,
+      midExam: null,
+      finalExam: null,
+    },
+    secondSemester: {
+      test1: null,
+      test2: null,
+      classActivity: null,
+      midExam: null,
       finalExam: null,
     },
   }));
